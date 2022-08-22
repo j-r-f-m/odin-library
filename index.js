@@ -10,16 +10,6 @@ function Book(title, author, pages, readStatus) {
   }
 }   
 
-  
-
-/* test books */
-/* const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', '295 pages', 'not read yet');
-const leviathanRising = new Book('Leviathan Rising', 'James R. Corey', '800 pages', 'read');
-const cibolaBurn = new Book('Cibola Burn', 'James R. Corey', '893 pages', 'not yet read'); */
-
-/* array containing books */
-let bookArray = [];
-
 // -----------------------------  buttons functions -------------------------------------
 function showForm() {
   /* fucntion that shows "the add book form and hides the button" */
@@ -49,6 +39,51 @@ function clearInputFields() {
   document.getElementById('readStatus').checked = false;
 }
 
+function logCurrBook(book) {
+  // testing function logs status of current book
+  console.log('book:')
+  console.log(book);
+
+}
+
+function createBook() {
+  /* function to save information */
+
+  const inputTitle = document.getElementById('title').value;
+  const inputAuthor = document.getElementById('author').value;
+  const inputPages = document.getElementById('pages').value;
+  const readStatus = document.querySelector('#readStatus').checked;
+  // form validation
+  /* I had to add the following code in order to make the from validation with
+    "required" work */
+  if (inputTitle === '') {
+
+    return
+  } else if (inputAuthor === '') {
+    
+    return
+  } else if (inputPages === '') {
+    
+    return
+  } else if (readStatus === '') {
+    
+    return
+  }
+  // create new book object
+  const currentBook = new Book(
+    `${inputTitle}`, `${inputAuthor}`, `${inputPages}`, readStatus
+    )
+  // TESTING
+  logCurrBook(currentBook);
+  // push created book into global book array
+  bookArray.push(currentBook);
+  // create dom elements for books
+  showBooks(bookArray);
+  // clear input fields after user creates book
+  clearInputFields()
+  hideForm();
+}
+
 function deleteBook(e) {
   //delete book from library
   //console.log('delete-btn');
@@ -63,23 +98,16 @@ function bookNotRead(e) {
   // of the corresponding book object to "book not read" (false)
   // it also changes the status button from book read to book not read
 
-
-  
   // get class name of clicked button 
   const classOfBtn = e.target.className;
- 
-  
   // the last char of the class name corresponds to the position of the clicked 
   // on book object in the array, access last char of class in oder to acces the
   // book object in the array
   const idxOfCurrBtn = classOfBtn.charAt(classOfBtn.length-1); 
-
-
+  // change read status of book
   bookArray[idxOfCurrBtn].readStatus = false;
-  //test
-  console.log("changed status from 'read' to 'not read'");
-  console.log(bookArray[idxOfCurrBtn])
-  
+  //TESTING
+  logCurrBook(bookArray[idxOfCurrBtn]);
   
   // create status button, the status of the current book object has changed
   // the button must reflect that change, the button gets changed from "book-read"
@@ -100,13 +128,11 @@ function bookNotRead(e) {
 }
 
 
+
 function bookRead(e) {
-  console.log('lol')
   // if you click on the "book not read" button this functions changes the status
   // of the corresponding book object to "book read" (true)
-  // it also changes the status button from book not read to book read
-
-
+  // it also changes the status button from book not read to book rea
   
   // get class name of clicked button 
   const classOfBtn = e.target.className;
@@ -140,55 +166,7 @@ function bookRead(e) {
 
 }
 
-function submitInfo() {
-  /* function to save information */
 
-  // get book information
-  const inputTitle = document.getElementById('title').value;
-  const inputAuthor = document.getElementById('author').value;
-  const inputPages = document.getElementById('pages').value;
-  const readStatus = document.querySelector('#readStatus').checked;
-  //console.log(readStatus);
-
-
-  // test
-/*   console.log(inputTitle);
-  console.log(inputAuthor);
-  console.log(inputPages);
-  console.log(readStatus); */
-
-  // check if inputs have a value - if input is empty nothing happens
-  /* I had to add the following code in order to make the from validation with
-     "required" work */
-  if (inputTitle === '') {
-    
-    return
-  } else if (inputAuthor === '') {
-    
-    return
-  } else if (inputPages === '') {
-    
-    return
-  } else if (readStatus === '') {
-    
-    return
-  }
-  // initilize new book object
-  const currentBook = new Book(
-    `${inputTitle}`, `${inputAuthor}`, `${inputPages}`, readStatus
-    )
-
-  // look new book instance
-  console.log('new book instance:')
-  console.log(currentBook);
-
-  bookArray.push(currentBook);
- 
-  showBooks(bookArray);
-  clearInputFields()
-  hideForm();
-  
-}
 
 
 
@@ -244,7 +222,7 @@ function showBooks(booksArr) {
       // true - if book is read create book read button
       
       readStatusBtn.classList.add(`book-read-${i}`);
-      readStatusBtn.textContent = 'Book Read';
+      readStatusBtn.textContent = 'Read';
       /* if book is read 
       and user clicks on book-read button the state of the book
       will change to book not read */
@@ -252,7 +230,7 @@ function showBooks(booksArr) {
     } else {
       // false - if book is not read
       readStatusBtn.classList.add(`book-not-read-${i}`);
-      readStatusBtn.textContent = 'Book not Read';
+      readStatusBtn.textContent = 'Not Read';
       readStatusBtn.addEventListener('click', bookRead)
     }
     
@@ -273,7 +251,11 @@ function showBooks(booksArr) {
 }
 
 
-// ---------------------------- GLobal Code
+// ---------------------------- GLobal Code ---------------------------
+
+/* array containing books */
+let bookArray = [];
+
 // ---------------------------- buttons -------------------------------
 // selcet buttons
 const btnAddBook = document.querySelector('#button-add');
@@ -282,10 +264,6 @@ btnAddBook.addEventListener('click', showForm);
 const btnCloseForm = document.querySelector('.cancel');
 btnCloseForm.addEventListener('click', hideForm);
 
-// get value of form inputs
+// create book
 const btnSubmitInfo = document.querySelector('.submit');
-btnSubmitInfo.addEventListener('click', submitInfo);
-
-// book read
-/* const btnBookRead = document.querySelector('.book-read');
-btnBookRead.addEventListener('click', bookNotRead); */
+btnSubmitInfo.addEventListener('click', createBook);

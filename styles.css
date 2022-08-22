@@ -71,11 +71,24 @@ header {
     grid-template-rows: 0.1fr 1.0fr;
 }
 
+form > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form > div > input, form > div > button {
+    margin: 0.5rem;
+}
+
+
+
+
 /* --------------------------------------------------------------------- */
 
 /* ------------------------- styling ----------------------------------- */
 header {
-    background-color: #279AF1;
+    background-color: #70ABAF;
     
     display: flex;
     justify-content: center;
@@ -86,13 +99,13 @@ header {
 }
 
 header > h1 {
-    color: #F7F7FF;
+    color: #F0F7F4;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .content {
-    background-color: #F7F7FF;
+    background-color: #F0F7F4;
     display: grid;
 }
 
@@ -106,9 +119,9 @@ header > h1 {
 }
 
 #button-add {
-    background-color: #60656F; /* Green */
+    background-color: #3F4045; /* Green */
     border: none;
-    color: white;
+    color: #F0F7F4;
     padding: 15px 32px;
     margin: 1.5rem;
     text-align: center;
@@ -124,12 +137,22 @@ button:hover {
 
 .book-form {
     display: none;
-    /* flex-direction: column; */
-    border: solid 3px red;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
 
-    background-color: whitesmoke;
+    background-color: #705D56;
     position: absolute;
     z-index: 2; 
+}
+
+form > div > input, form > div > button {
+    border-radius: 0.4rem;
+    border: 1px solid #705D56;
+}
+
+form > div > input {
+    height: 1.1rem;
 }
 
 .card-container {
