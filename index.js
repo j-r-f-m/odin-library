@@ -59,14 +59,85 @@ function deleteBook(e) {
 }
 
 function bookNotRead(e) {
-  const classOfBtn = e.target.className;
-  const idxOfCurrBtn = classOfBtn.splice(-1);
-  console.log(classOfBtn);
-  console.log(typeof(classOfBtn));
-  console.log(idxOfCurrBtn);
-  /* bookArray[classOfBtn.charAt(-1)].readStatus = false; */
-  console.log(bookArray[classOfBtn-1]);
+  // if you click on the "book read" button this functions changes the status
+  // of the corresponding book object to "book not read" (false)
+  // it also changes the status button from book read to book not read
+
+
   
+  // get class name of clicked button 
+  const classOfBtn = e.target.className;
+ 
+  
+  // the last char of the class name corresponds to the position of the clicked 
+  // on book object in the array, access last char of class in oder to acces the
+  // book object in the array
+  const idxOfCurrBtn = classOfBtn.charAt(classOfBtn.length-1); 
+
+
+  bookArray[idxOfCurrBtn].readStatus = false;
+  //test
+  console.log("changed status from 'read' to 'not read'");
+  console.log(bookArray[idxOfCurrBtn])
+  
+  
+  // create status button, the status of the current book object has changed
+  // the button must reflect that change, the button gets changed from "book-read"
+  // to "book not read"
+  const readStatusBtn = document.createElement('button');
+  readStatusBtn.setAttribute('type', 'button');
+  readStatusBtn.classList.add(`book-not-read-${idxOfCurrBtn}`);
+  readStatusBtn.textContent = 'Not Read';
+
+  readStatusBtn.addEventListener('click', bookRead);
+  
+  // select book-read button to replace it with book not read button
+  const bookReadBtn = document.querySelector(`.book-read-${idxOfCurrBtn}`);
+  
+
+  bookReadBtn.parentNode.replaceChild(readStatusBtn, bookReadBtn);
+
+}
+
+
+function bookRead(e) {
+  console.log('lol')
+  // if you click on the "book not read" button this functions changes the status
+  // of the corresponding book object to "book read" (true)
+  // it also changes the status button from book not read to book read
+
+
+  
+  // get class name of clicked button 
+  const classOfBtn = e.target.className;
+  // the last char of the class name corresponds to the position of the clicked 
+  // on book object in the array, access last char of class in oder to acces the
+  // book object in the array
+  const idxOfCurrBtn = classOfBtn.charAt(classOfBtn.length-1); 
+
+  // change read status of current book
+  bookArray[idxOfCurrBtn].readStatus = true;
+  //test
+  console.log("changed status from 'not read' to 'not read'");
+  console.log(bookArray[idxOfCurrBtn])
+  
+  // create status button, the status of the current book object has changed
+  // the button must reflect that change, the button gets changed from "book-read"
+  // to "book not read"
+  const readStatusBtn = document.createElement('button');
+  readStatusBtn.setAttribute('type', 'button');
+  readStatusBtn.classList.add(`book-read-${idxOfCurrBtn}`);
+  readStatusBtn.textContent = 'Read';
+
+  readStatusBtn.addEventListener('click', bookNotRead);
+  
+  // select book-not-read button to replace it with book read button
+  const bookNotReadBtn = document.querySelector(`.book-not-read-${idxOfCurrBtn}`);
+
+  
+
+  bookNotReadBtn.parentNode.replaceChild(readStatusBtn, bookNotReadBtn);
+
 }
 
 function submitInfo() {
@@ -102,18 +173,17 @@ function submitInfo() {
     
     return
   }
+  // initilize new book object
   const currentBook = new Book(
     `${inputTitle}`, `${inputAuthor}`, `${inputPages}`, readStatus
     )
 
-  // test
+  // look new book instance
+  console.log('new book instance:')
   console.log(currentBook);
+
   bookArray.push(currentBook);
-  // test 
-  /* console.log(bookArray);
-  console.log(currentBook.title); */
- /*  showBooks(bookArray); */
-  /* addBook(currentBook.title, currentBook.author, currentBook.pages, currentBook.readStatus); */
+ 
   showBooks(bookArray);
   clearInputFields()
   hideForm();
@@ -122,22 +192,7 @@ function submitInfo() {
 
 
 
-// ---------------------------- buttons -------------------------------
-// selcet buttons
-const btnAddBook = document.querySelector('#button-add');
-console.log(btnAddBook);
-btnAddBook.addEventListener('click', showForm);  
 
-const btnCloseForm = document.querySelector('.cancel');
-btnCloseForm.addEventListener('click', hideForm);
-
-// get value of form inputs
-const btnSubmitInfo = document.querySelector('.submit');
-btnSubmitInfo.addEventListener('click', submitInfo);
-
-// book read
-/* const btnBookRead = document.querySelector('.book-read');
-btnBookRead.addEventListener('click', bookNotRead); */
 
 
 // ------------------------------- manage boooks -----------------------
@@ -184,16 +239,21 @@ function showBooks(booksArr) {
     const readStatusBtn = document.createElement('button');
     readStatusBtn.setAttribute('type', 'button');
     
+    // set book read status to true or false depending on the check box
     if (bookArray[i].readStatus) {
-      console.log('ture');
+      // true - if book is read create book read button
+      
       readStatusBtn.classList.add(`book-read-${i}`);
-      readStatusBtn.textContent = 'Book-Read';
-      /* if book is read and user clicks on book-read button the state of the book
+      readStatusBtn.textContent = 'Book Read';
+      /* if book is read 
+      and user clicks on book-read button the state of the book
       will change to book not read */
       readStatusBtn.addEventListener('click', bookNotRead)
     } else {
-      readStatusBtn.classList.add('book-not-read');
-      readStatusBtn.textContent = 'Book-not-Read';
+      // false - if book is not read
+      readStatusBtn.classList.add(`book-not-read-${i}`);
+      readStatusBtn.textContent = 'Book not Read';
+      readStatusBtn.addEventListener('click', bookRead)
     }
     
     newCard.appendChild(readStatusBtn);
@@ -212,7 +272,20 @@ function showBooks(booksArr) {
   }
 }
 
-/* showBooks(bookArray) */
 
+// ---------------------------- GLobal Code
+// ---------------------------- buttons -------------------------------
+// selcet buttons
+const btnAddBook = document.querySelector('#button-add');
+btnAddBook.addEventListener('click', showForm);  
 
+const btnCloseForm = document.querySelector('.cancel');
+btnCloseForm.addEventListener('click', hideForm);
 
+// get value of form inputs
+const btnSubmitInfo = document.querySelector('.submit');
+btnSubmitInfo.addEventListener('click', submitInfo);
+
+// book read
+/* const btnBookRead = document.querySelector('.book-read');
+btnBookRead.addEventListener('click', bookNotRead); */
