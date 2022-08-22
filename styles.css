@@ -68,6 +68,7 @@ header {
 
 .content {
     grid-row: 2 / 3;
+    grid-template-rows: 0.1fr 1.0fr;
 }
 
 /* --------------------------------------------------------------------- */
@@ -75,9 +76,13 @@ header {
 /* ------------------------- styling ----------------------------------- */
 header {
     background-color: #279AF1;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+    z-index: 1;
 }
 
 header > h1 {
@@ -89,13 +94,15 @@ header > h1 {
 .content {
     background-color: #F7F7FF;
     display: grid;
-    grid-template-rows: 0.1fr 1.0fr;
 }
 
 .container-button {
     display: flex;
     justify-content: center;
     grid-row: 1 / 2;
+    position: relative;
+
+    min-height: 7rem;
 }
 
 #button-add {
@@ -119,6 +126,10 @@ button:hover {
     display: none;
     /* flex-direction: column; */
     border: solid 3px red;
+
+    background-color: whitesmoke;
+    position: absolute;
+    z-index: 2; 
 }
 
 .card-container {

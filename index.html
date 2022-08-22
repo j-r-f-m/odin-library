@@ -20,46 +20,41 @@
             <div class="container-button">
                 <button id="button-add">Add Book</button>
 
-                <!-- add-book form -->
+                <!-- add-book form - form to create book entry-->
                 <div class="book-form" id="add-book-form">
                     <form action="">
                         <h1>Add book</h1>
 
                         <div>
                             <label for="title">Title</label>
-                            <input type="text" placeholder="Title" name="title" required>
+                            <input type="text" placeholder="Title" name="title" id="title" required />
                         </div>  
                         
                         <div>
                             <label for="author">Author</label>
-                            <input type="text" placeholder="Author" name="author" required>
+                            <input type="text" placeholder="Author" name="author" id="author" required />
                         </div>
                         
                         <div>
                             <label for="pages">Pages</label>
-                            <input type="text" placeholder="pages" name="pages" required>
+                            <input type="text" placeholder="pages" name="pages" id="pages" required />
                         </div>
 
                         <div>
-                            <label for="readStatus">Status</label>
-                            <input type="text" placeholder="Read Status" name="readStatus" required>
+                            <label for="readStatus">Have you read the book?</label>
+                            <input type="checkbox" placeholder="Read Status" name="readStatus" id="readStatus" />
                         </div>
 
-                        <button class="submit">Submit</button>
-                        <button class="cancel">Cancel</button>
+                        <button type="submit" class="submit">Submit</button>
+                        <button type="button" class="cancel">Cancel</button>
 
                     </form>
                 </div>
             </div>
             
-
+            <!-- container which holds the book entries -->
             <div class="card-container">
-                <div class="card-book">
-                    <h1 class="book-title">title</h1>
-                    <p>author</p>
-                    <p>pages</p>
-                    <p>read</p>
-                </div>  
+
             </div>
 
             
