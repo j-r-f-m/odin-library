@@ -104,6 +104,15 @@ header > h1 {
     font-weight: bolder;
 }
 
+svg {
+    height: 3rem;
+}
+
+path {
+    fill: #F0F7F4;
+
+}
+
 .content {
     background-color: #F0F7F4;
     display: grid;
@@ -130,6 +139,19 @@ header > h1 {
     font-size: 16px;
 }
 
+form > div > button {
+    background-color: #706762; /* Green */
+    border: none;
+    color: #F0F7F4;
+    padding: 10px;
+
+    width: 7rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
@@ -141,18 +163,30 @@ button:hover {
     padding: 1rem;
     border-radius: 1rem;
 
-    background-color: #705D56;
+    background-color: #80B5B8;
     position: absolute;
     z-index: 2; 
 }
 
 form > div > input, form > div > button {
     border-radius: 0.4rem;
-    border: 1px solid #705D56;
+    border: 1px solid #80B5B8;
 }
+
 
 form > div > input {
     height: 1.1rem;
+    background-color: #F0F7F4;
+    
+}
+
+form {
+    color: #F0F7F4;
+}
+
+input[type='checkbox'] {
+    border: none;
+    accent-color: #706762;
 }
 
 .card-container {
