@@ -43,7 +43,6 @@ function logCurrBook(book) {
   // testing function logs status of current book
   console.log('book:')
   console.log(book);
-
 }
 
 function createBook() {
@@ -121,13 +120,10 @@ function bookNotRead(e) {
   
   // select book-read button to replace it with book not read button
   const bookReadBtn = document.querySelector(`.book-read-${idxOfCurrBtn}`);
-  
 
   bookReadBtn.parentNode.replaceChild(readStatusBtn, bookReadBtn);
 
 }
-
-
 
 function bookRead(e) {
   // if you click on the "book not read" button this functions changes the status
@@ -160,18 +156,8 @@ function bookRead(e) {
   // select book-not-read button to replace it with book read button
   const bookNotReadBtn = document.querySelector(`.book-not-read-${idxOfCurrBtn}`);
 
-  
-
   bookNotReadBtn.parentNode.replaceChild(readStatusBtn, bookNotReadBtn);
-
 }
-
-
-
-
-
-
-
 
 // ------------------------------- manage boooks -----------------------
 function showBooks(booksArr) {
@@ -244,12 +230,8 @@ function showBooks(booksArr) {
     /* add eventlistener to button in order to be able to add function*/
     deleteBtn.addEventListener('click', deleteBook);
     newCard.appendChild(deleteBtn);
-
-    
-
   }
 }
-
 
 // ---------------------------- GLobal Code ---------------------------
 
